@@ -1,15 +1,14 @@
 TARGET = helloworld
 CC ?= $(CROSS_COMPILE)gcc
-CFLAGS = -Wall -Wextra -g
 DESTDIR ?= /usr/bin
 
 all: $(TARGET)
 
 $(TARGET): helloworld.o
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(LDFLAGS) -c $< -o $@
 
 install:
 	install -d $(DESTDIR)
