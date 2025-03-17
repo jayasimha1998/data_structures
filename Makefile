@@ -1,17 +1,18 @@
-all: hello_make
+all: git_make
 
-hello_make: hello_make.o
-	${CC}	${LDFLAGS} hello_make.o -o hello_make
+git_make: git_make.o
+	${CC}	${LDFLAGS} git_make.o -o git_make
 
-hello_make.o: hello_make.c
-	${CC} ${CFLAGS} -c hello_make.c 
+git_make.o: git_make.c
+	${CC} ${CFLAGS} -c git_make.c 
 
 clean:
-	rm -f hello_make
+	rm -f *.o git_make
 
 install: all
 	mkdir -p ${DESTDIR}${bindir}
-	cp -f hello_make ${DESTDIR}${bindir}
-	chmod 755 ${DESTDIR}${bindir}/hello_make
+	cp -f git_make ${DESTDIR}${bindir}
+	chmod 755 ${DESTDIR}${bindir}/git_make
+
 
 .PHONY: all clean install
