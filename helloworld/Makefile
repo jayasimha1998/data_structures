@@ -1,26 +1,21 @@
-# Compiler and flags
-CC = gcc
-CFLAGS = -Wall -Wextra -g
 TARGET = helloworld
+CC ?= $(CROSS_COMPILE)gcc
+CFLAGS = -Wall -Wextra -g
+DESTDIR ?= /usr/bin
 
-# Source files
-SRCS = helloworld.c
-OBJS = $(SRCS:.c=.o)
-
-# Default target
 all: $(TARGET)
 
-# Link the executable
-$(TARGET): $(OBJS)
+$(TARGET): helloworld.o
 	$(CC) $(CFLAGS) -o $@ $^
 
-# Compile source files into object files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean build artifacts
+install:
+	install -d $(DESTDIR)
+	install -m 0755 $(TARGET) $(DESTDIR)/$(TARGET)
+
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f *.o $(TARGET)
 
-.PHONY: all clean
-
+.PHONY: all install clean
